@@ -57,8 +57,8 @@ app.post("/data", (request, response) => {
     } catch(error){
         console.error(error);
     }
-    response.json(reply);
-    response.end();
+    
+    response.send(reply);
 });
 
 app.get("/search/:flower/:num?", get_sunflower);
