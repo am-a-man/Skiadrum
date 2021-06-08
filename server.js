@@ -18,7 +18,8 @@ const { finished } = require('stream');
 
 var app = express();
 // var server = app.listen(8000, listening);
-
+var server = app.listen(process.env.PORT || 3000, 
+	() => console.log("Server is running..."));
 function listening() {
     console.log("listening...");
 }
