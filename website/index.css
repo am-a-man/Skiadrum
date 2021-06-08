@@ -1,0 +1,23 @@
+*{
+    background-color: black;
+    color: green;
+}
+
+
+h4{ 
+    color: green;
+    text-shadow: 1px 1px green ;
+    font-size: 25px;
+}
+
+
+p{
+    color: green;
+    text-shadow: 1px 1px green ;
+    font-size: 25px;
+}
+
+
+#word, #value, #submit{
+    color:green;
+}
