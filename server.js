@@ -1,9 +1,10 @@
 console.log("server is starting"); 
 
 var fs = require('fs');
+
 var data = fs.readFileSync('score.json');
-var afinnFile = fs.readFileSync('afinn.json');
 var score = JSON.parse(data);
+var afinnFile = fs.readFileSync('afinn.json');
 var afinnData = JSON.parse(afinnFile);
 
 
