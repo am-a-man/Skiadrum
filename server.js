@@ -49,7 +49,7 @@ app.use(express.static('website'));
 app.use(express.json())
 
 
-app.options('/data', cors()) // enable pre-flight 
+app.options('/data', cors(postCorsOptions)) // enable pre-flight 
 app.post("/data", cors(postCorsOptions) , (request, response) => {
     var file = request.body;
     console.log(file.value);
