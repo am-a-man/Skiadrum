@@ -39,7 +39,8 @@ var postCorsOptions = {
 	"origin": ['http://127.0.0.1:5500','http://127.0.0.1:5501'],
 	"methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
 	"preflightContinue": false,
-	"optionsSuccessStatus": 204
+	"optionsSuccessStatus": 204,
+    "Content-Type":"appllication/json"
 }
 
 
@@ -47,6 +48,8 @@ var postCorsOptions = {
 app.use(express.static('website'));
 app.use(express.json())
 
+
+app.options('/data', cors()) // enable pre-flight 
 app.post("/data", cors(postCorsOptions) , (request, response) => {
     var file = request.body;
     console.log(file.value);
