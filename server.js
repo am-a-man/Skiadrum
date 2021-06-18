@@ -17,6 +17,7 @@ const fetch = require("node-fetch");
 
 const { stringify } = require('querystring');
 const { finished } = require('stream');
+const { SSL_OP_EPHEMERAL_RSA } = require('constants');
 
 var app = express();
 // var server = app.listen(8000, listening);
@@ -91,15 +92,15 @@ function get_ping(request, response){
         "active":"true"
     };
     
-    async function ping(){
+    function ping(){
         setTimeout(() => {
             console.log("pinging requip/herokuapp.com");
-            await fetch("https://requip.herokuapp.com/ping").then(response => {
+            fetch("https://requip.herokuapp.com/ping").then(response => {
                 return response.json();
         }).then(json => {
             return JSON.stringify(json);
         });
-   
+        
         }, 1000*5);
 
     }
