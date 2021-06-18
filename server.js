@@ -100,7 +100,7 @@ function get_ping(request, response){
             return JSON.stringify(json);
         });
         ping();
-        }, 1000*10);
+        }, 1000*60*5);
 
     }
     ping();
