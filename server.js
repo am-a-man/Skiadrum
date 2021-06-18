@@ -13,6 +13,7 @@ var afinnData = JSON.parse(afinnFile);
 const { response, json, request } = require('express');
 var express = require('express');
 var cors = require('cors')
+const fetch = require("node-fetch");
 
 const { stringify } = require('querystring');
 const { finished } = require('stream');
