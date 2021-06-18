@@ -91,10 +91,10 @@ function get_ping(request, response){
         "active":"true"
     };
     
-    function ping(){
+    async function ping(){
         setTimeout(() => {
             console.log("pinging requip/herokuapp.com");
-            fetch("https://requip.herokuapp.com/ping").then(response => {
+            await fetch("https://requip.herokuapp.com/ping").then(response => {
                 return response.json();
         }).then(json => {
             return JSON.stringify(json);
