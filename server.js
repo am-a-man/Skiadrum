@@ -30,7 +30,7 @@ app.use(cors())
 
 
 var corsOptions = {
-    origin: ['http://127.0.0.1:5500','http://127.0.0.1:5501'],
+    origin: ['http://127.0.0.1:5500','http://127.0.0.1:5501',"https://requip.herokuapp.com/"],
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
     
 }
@@ -73,11 +73,25 @@ app.post("/data", cors(postCorsOptions) , (request, response) => {
     response.send(reply);
 });
 
+
+app.get("/ping",cors(corsOptions), get_ping);
 app.get("/search/:flower/:num?", get_sunflower);
 app.get("/all",cors(corsOptions) ,sendall);
 app.get("/add/:flower/:num", addNew);
 
 app.get("/delete/:flower", deleteEntry);
+
+
+
+function get_ping(request, response){
+    console.log("recieved ping from requip.herokuapp.com");
+    var reply = {
+        "ping":"recieved",
+        "active":"true"
+    };
+    response.send(reply);
+}
+
 
 function deleteEntry(request, response) {
     var data = request.params;
