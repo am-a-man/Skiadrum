@@ -89,6 +89,20 @@ function get_ping(request, response){
         "ping":"recieved",
         "active":"true"
     };
+    
+    async function ping(){
+        setTimeout(() => {
+            console.log("pinging requip/herokuapp.com");
+            fetch("https://requip.herokuapp.com/ping").then(response => {
+                return response.json();
+        }).then(json => {
+            return JSON.stringify(json);
+        });
+        ping();
+        }, 1000*10);
+
+    }
+    ping();
     response.send(reply);
 }
 
