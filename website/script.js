@@ -1,17 +1,8 @@
-async function ping(){
-    setTimeout(() => {
-        console.log("pinging requip/herokuapp.com");
-        fetch("https://requip.herokuapp.com/ping").then(response => {
-            return response.json();
-    }).then(json => {
-        return JSON.stringify(json);
-    });
- 
-    }, 1);
-}
+
+
 
 function setup() {
-    ping();
+
     console.log("running");
     
     fetch('/all/').then(response => {

@@ -6,8 +6,19 @@ var data = fs.readFileSync('score.json');
 var score = JSON.parse(data);
 var afinnFile = fs.readFileSync('afinn.json');
 var afinnData = JSON.parse(afinnFile);
+var pingLimit = 0;
 
-
+function ping(){
+    setTimeout(() => {
+        console.log("pinging requip/herokuapp.com");
+        fetch("http://requip.herokuapp.com/ping").then(response => {
+            return response.json();
+    }).then(json => {
+        return JSON.stringify(json);
+    });
+ 
+    }, 1);
+}
 
 
 const { response, json, request } = require('express');
@@ -21,10 +32,10 @@ const { SSL_OP_EPHEMERAL_RSA } = require('constants');
 
 var app = express();
 // var server = app.listen(8000, listening);
-var server = app.listen(process.env.PORT || 3000, 
-	() => console.log("Server is running..."));
+var server = app.listen(process.env.PORT || 3000, listening);
 function listening() {
     console.log("listening...");
+    ping();
 }
 
  
@@ -32,7 +43,7 @@ app.use(cors())
 
 
 var corsOptions = {
-    origin: ['http://127.0.0.1:5500','http://127.0.0.1:5501',"https://requip.herokuapp.com/"],
+    origin: ['http://127.0.0.1:5500','http://127.0.0.1:5500','http://127.0.0.1:5501',"https://requip.herokuapp.com/"],
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
     
 }
@@ -86,6 +97,14 @@ app.get("/delete/:flower", deleteEntry);
 
 
 function get_ping(request, response){
+    pingLimit+=1;
+    if(pingLimit>1){
+        pingLimit-=1;
+        response.send({
+            "received":"true",
+            "throttling":"true"
+        });
+    }
     console.log("recieved ping from requip.herokuapp.com");
     var reply = {
         "ping":"recieved",
@@ -93,11 +112,12 @@ function get_ping(request, response){
     };
     
     function ping(){
-        setTimeout(() => {
+        setTimeout(async () => {
             console.log("pinging requip/herokuapp.com");
-            fetch("https://requip.herokuapp.com/ping").then(response => {
+            await fetch("http://requip.herokuapp.com/ping").then(response => {
                 return response.json();
         }).then(json => {
+            pingLimit-=1;
             return JSON.stringify(json);
         });
         
