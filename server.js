@@ -104,8 +104,10 @@ function get_ping(request, response){
             "received":"true",
             "throttling":"true"
         });
+        return;
     }
     console.log("recieved ping from requip.herokuapp.com");
+
     var reply = {
         "ping":"recieved",
         "active":"true"
