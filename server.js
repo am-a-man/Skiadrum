@@ -35,7 +35,8 @@ var app = express();
 var server = app.listen(process.env.PORT || 3000, listening);
 function listening() {
     console.log("listening...");
-    ping();
+    /* disabling ping */
+    //ping();
 }
 
  
