@@ -35,7 +35,7 @@ var app = express();
 var server = app.listen(process.env.PORT || 3000, listening);
 function listening() {
     console.log("listening...");
-    /* disabling ping */
+    /* disabling ping , to enable uncomment ping call from this block as well as in get_ping function */
     //ping();
 }
 
@@ -127,7 +127,7 @@ function get_ping(request, response){
         }, 1000*60*10);
 
     }
-    ping();
+   // ping();
     response.send(reply);
 }
 
